@@ -15,10 +15,11 @@ It's also a fast way to launch a demo WordPress website and test anything you wa
 ## How to use
 
 ```sh
-wget https://github.com/vvo/lazyload/archive/master.zip -o tmp-master-docker-compose.zip
+wget https://github.com/algolia/docker-compose-wordpress/archive/master.zip -O tmp-master-docker-compose.zip
 unzip tmp-master-docker-compose.zip
 rm tmp-master-docker-compose.zip
-cd docker-compose-wordpress
+mv docker-compose-wordpress-master super-blog
+cd super-blog
 wget https://wordpress.org/latest.zip
 unzip latest.zip
 rm latest.zip
