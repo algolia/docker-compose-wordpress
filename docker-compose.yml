@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.3.12
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - 44006:3306
+
+  adminer:
+    image: adminer:4.7.0
+    restart: always
+    ports:
+      - 44100:8080
+
+  web:
+    image: nginx:1.15.8
+    ports:
+        - 44000:80
+    volumes:
+        - ./wordpress:/wordpress
+        - ./additional-configurations/site.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+        - php
+  php:
+    build:
+      context: ./
+      dockerfile: additional-configurations/php-Dockerfile
+    volumes:
+        - ./wordpress:/wordpress
+        - ./additional-configurations/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - db
