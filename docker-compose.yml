@@ -16,7 +16,7 @@ services:
       - 44006:3306
 
   adminer:
-    image: adminer:4.7.0
+    image: adminer:4.7.1
     restart: always
     ports:
       - 44100:8080
